@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>内联元素垂直 padding 也有作用实例页面</title>
+  <style>
+    .demo {
+      text-align: center;
+      margin: 100px;
+      border: 1px solid red;
+      /* overflow: auto; */
+    }
+    a.inline-padding {
+      padding: 50px;
+      background-color: #f3f0f9;
+      color: #fff;
+    }
+  </style>
+  <style>
+    a { color: #34538b; }
+    a { text-decoration: none; }
+    a + a:before {
+      content: "";
+      font-size: 0;
+      padding: 10px 3px 1px;
+      margin-left: 6px;
+      border-left: 1px solid gray;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+    <a href class="inline-padding">链接</a>
+    <p>利用内联元素的 padding 实现高度可控的分隔线</p>
+    <a href>登录</a><a href>注册</a>
+  </div>
+</body>
+</html>

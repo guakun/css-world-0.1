@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>不要给表现为外部尺寸的块级元素设置宽度, 不然它将失去它的流动性</title>
+  <style>
+    .box { width: 200px; }
+  </style>
+  <style>
+    .width { width: 100%; }
+    .nav { background-color: #cd0000; }
+    .nav-a { display: block; margin: 0 10px; padding: 9px 10px; border-bottom: 1px solid #b70000; border-top: 1px solid #de3636; color: #fff; }
+    .nav-a:first-child { border-top: 0; }
+    .nav-a + .nav-a + .nav-a { border-bottom: 0; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h4> 无宽度， 借助流动性</h4>
+    <div class="nav">
+      <a href="" class="nav-a">导航1</a>
+      <a href="" class="nav-a">导航2</a>
+      <a href="" class="nav-a">导航3</a>
+    </div>
+    <h4> width: 100%</h4>
+    <div class="nav">
+      <a href="" class="nav-a width">导航1</a>
+      <a href="" class="nav-a width">导航2</a>
+      <a href="" class="nav-a width">导航3</a>
+    </div>
+  </div>
+  <h4> 格式化宽度: </h4>
+  <p>格式化宽度仅出现在“绝对定位模型”中，也就是出现在 position 属性值为 absolute 或 fixed 的元素中。</p>
+  <p>在默认情况下，绝对定位元素的宽度表现是“包裹性”，宽度由内部尺寸决定，但是，有一种情况其宽度是由外部尺寸决定的: </p>
+  <p>对于非替换元素，当 left/top 或 top/bottom 对立方位的属性值同时存在的时候，元素的宽度表现为“格式化宽度”，其宽度大小相对于近的具有定位特性 （position 属性值不是 static）的祖先元素计算</p>
+  <p>例如，下面一段 CSS 代码:
+    div { position: absolute; left: 20px; right: 20px; }
+    假设该 div 元素近的具有定位特性的祖先元素的宽度是 1000 像素，则这个 div 元素的宽 度是 960（即 1000−20−20）像素。</p>
+</body>
+</html>

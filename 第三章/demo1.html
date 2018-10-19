@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>使用块级元素换行特性实现清除浮动</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <script src="main.js"></script>
+  <style>
+    .box { padding: 10px; background-color: #cd0000;}
+    .box > img { float: left; }
+    .clear:after { content: ''; display: table; clear: both;}
+    .clear:after { content: ''; display: block; clear: both;}
+    .clear:after { content: ''; display: list-item; clear: both;} /** IE 不兼容 */ /** 只是可以实现清除浮动 但我们不用 */
+  </style>
+</head>
+<body>
+  <div class="box clear">
+    <img src="../image/logo.png">
+  </div>
+</body>
+</html>

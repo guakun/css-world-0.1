@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>未定义行为</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    a:active { background-color: red; }
+  </style>
+</head>
+<body>
+  <a href="#" id="button">button</a>
+  <script>
+    button.addEventListener('mousedown', function(event) {
+      console.log('trigger')
+      event.preventDefault()
+    })
+  </script>
+</body>
+</html>

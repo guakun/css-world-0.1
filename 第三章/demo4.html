@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>width: auto; 超出容器限制的情况</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <script src="main.js"></script>
+  <style>
+    .father { width: 150px; background-color: #cd0000; white-space: nowrap;  padding: 10px; }
+    .child { display: inline-block; padding: 5px; background-color: #f0f3f9; }
+  </style>
+  <style>
+    a { border: 1px solid red; }
+    a {
+      display: block;
+      width: 100%; /* 这一行完全没必要 */
+    }
+  </style>
+</head>
+<body>
+  <div class="father">
+    <div class="child">
+      恰如一江春水向东流，流到断崖也不回头
+    </div>
+  </div>
+  <a href="#">吐槽同行的写法</a>
+  <!-- 吐槽原文: <a>元素默认 diplay 是 inline，所以，设置 display:block 使其块状化绝对没有问 题，但后面的 width:100%就没有任何出现的必要了. -->
+</body>
+</html>

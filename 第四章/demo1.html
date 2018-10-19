@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>替换元素和非替换元素之间就差了一个 src 属性</title>
+  <style>
+    /* 张鑫旭大佬说在 css reset 的时候最好加上下面这句话 因为 firefox 浏览器 对 <img> 标签有自己的看法 会把它看为一个普通的内联元素 */
+    img { display: inline-block; }
+  </style>
+  <style>
+    body { text-align: center; }
+  </style>
+  <style>
+    img { border: 1px solid red; }
+    .constr { width: 300px; margin: auto; border: 1px solid red; }
+    h5 { margin: 1.5em 0 1em; font-weight: bold; }
+    img {
+      display: inline-block;
+      width: 124px;
+      height: 53px;
+      color: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    /* 隐藏 Chrome alt 文字以及银色边框 */
+    img:not([src]) { visibility: hidden; }
+    img::before {
+      /* 淡蓝色占位背景 */
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%; height: 100%;
+      background-color: #f0f3f9;
+      visibility: visible;
+    }
+    img::after {
+      /* 黑色 alt 信息条 */
+      content: attr(alt);
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 100%;
+      line-height: 30px;
+      background-color: rgba(0, 0, 0, .5);
+      color: white;
+      font-size: 14px;
+      transform: translateY(100%);
+      transition: transform .2s;
+      visibility: visible;
+    }
+    img:hover::after {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <p>基于伪元素的图片内容生成技术</p>
+  <div class="constr">
+    <h5> hover 下面区域</h5>
+    <img alt="任意萌 logo" src="../image/logo.png">
+    <p> <button>设置 src 属性显示图片</button> </p>
+    <!-- <p> <button>移除 src 属性</button> </p> -->
+  </div>
+
+  <script>
+    var eleButton = document.querySelector('button'),
+      eleImg = document.querySelector('img')
+
+    if (eleButton && eleImg) {
+      var initValueButton = eleButton.innerHTML
+      var srcImage = eleImg.getAttribute('src')
+      eleImg.removeAttribute('src')
+      eleButton.addEventListener('click', function() {
+        if (this.innerHTML === initValueButton) {
+          this.innerHTML = '移除 src 属性'
+          eleImg.setAttribute('src', srcImage)
+        } else {
+          this.innerHTML = initValueButton
+          eleImg.removeAttribute('src')
+        }
+      })
+    }
+  </script>
+</body>
+</html>

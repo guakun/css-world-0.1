@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>替换元素与非替换元素之间只隔了一个 CSS content 属性</title>
+  <style>
+    img.content:not([src]) {
+      content: url(../image/logo.png)
+    }
+    img.hover:hover {
+      content: url(../image/it-logo.png)
+    }
+  </style>
+  <style>
+    .box { border: 1px solid #f3f0f9;}
+    .box {
+      width: 512px; height: 321px;
+      margin: auto;
+      border-bottom-style: dashed;
+      text-align: justify;
+    }
+    .box:before {
+      content: "";
+      display: inline-block;
+      height: 100%;
+    }
+    .box:after {
+      content: "";
+      display: inline-block;
+      width: 100%;
+    }
+    .bar {
+      display: inline-block;
+      width: 20px;
+      height: 0;
+      background: #cd0000;
+      transition: height .25s .2s;
+    }
+  </style>
+</head>
+<body>
+  <p>是在 Chrome 浏览器下，所有的元素都支持 content 属性，而其他浏览器仅在::before/::after 伪元素 中才有支持</p>
+  <h4>1. 常规实现</h4>
+  <img src="../image/logo.png" alt="logo" class="normal">
+  <h4>2. content 实现</h4>
+  <img class="content">
+  <p>另外还有一点很有意思，如果图片原来是有 src 地址的，我们也是可以使用 content 属性把 图片内容给置换掉的，于是，我们就能轻松实现 hover 图片变成另外一张图片的效果。</p>
+  <img src="../image/logo.png" alt="logo" class="hover">
+
+  <p>使用 content 辅助实现 “两端对齐”以及“垂直 居中/上边缘/下边缘对齐”效果。</p>
+  <button id="addOne">再增加一条数据</button>
+  <div class="box" id="box"><i class="bar"></i>
+    <i class="bar"></i>
+    <i class="bar"></i>
+    <i class="bar"></i>
+  </div>
+
+  <script>
+    if (document.querySelector) {
+      var eleBox = document.getElementById('box')
+      // 目前柱子元素和个数
+      var eleBars = document.querySelectorAll('#box > i')
+      var lenBar = eleBars.length
+      if (eleBox && lenBar) {
+        for (var indexBar = 0; indexBar < lenBar; indexBar++) {
+          eleBars[indexBar].style.height = Math.ceil(321 * Math.random()) + 'px'
+          eleBars[indexBar].style.backgroundColor = '#' + (Math.random() + '').slice(-6)
+        }
+      }
+    }
+    // 增加数据
+    var eleBtn = document.getElementById('addOne')
+    if (eleBtn && lenBar) {
+      eleBtn.onclick = function() {
+        // 随机高度和背景色
+        var height = Math.ceil(321 * Math.random()) + 'px'
+        var backgroundColor = '#' + (Math.random() + '').slice(-6)
+
+        // 创建柱子元素
+        var eleClone = eleBars[0].cloneNode()
+        eleClone.style.height = height
+        eleClone.style.backgroundColor = backgroundColor
+
+        // 此处的字符替换为了兼容 IE8 下的演示效果
+        eleBox.innerHTML = eleBox.innerHTML.replace(/I><I/ig, 'I><I') + ' ' + eleClone.outerHTML
+
+        lenBar+=1
+        // 最多十条数据
+        if (lenBar === 10) {
+          this.setAttribute('disabled', 'disabled')
+        }
+      }
+    }
+  </script>
+</body>
+</html>

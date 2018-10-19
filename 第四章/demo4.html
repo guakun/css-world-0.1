@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>深入理解 content 计数器</title>
+  <style>
+    .counter {
+      counter-reset: guakun -2 guakun01 3;
+      font-size: 32px;
+      font-family: Arail Black;
+      color: #cd0000;
+    }
+    .counter:before {
+      content: counter(guakun)
+    }
+    .counter:after {
+      content: counter(guakun01)
+    }
+  </style>
+</head>
+<body>
+  <p>m guakun:</p>
+  <p class="counter"></p>
+</body>
+</html>

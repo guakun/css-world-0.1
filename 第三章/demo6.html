@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>width: auto; 为什么要体现包裹性 (shrink-to-fit) 呢?</title>
+  <style>
+    .box { border: 1px solid red; }
+    .box { width: 240px; margin: 20px auto; }
+    /* input { white-space: normal; } */
+  </style>
+</head>
+<body>
+  <div class="box">
+    <button>按钮</button>
+    <input type="button" value="按钮">
+  </div>
+  <div class="box">
+    <button>文字再多一点</button>
+    <input type="button" value="文字再多一点">
+  </div>
+  <div class="box">
+    <button>按钮文字越多宽度越宽（包裹，内部尺寸特性），但不会超过容器宽度（自适应性）</button>
+    <input type="button" value="按钮文字越多宽度越宽（包裹，内部尺寸特性），但不会超过容器宽度（自适应性）">
+  </div>
+  <p> button 标签按钮才会自动换行， input 标签按钮，默认 white-space:pre， 是不会换行的，需要将 pre 值重置为默认的 normal。 </p>
+</body>
+</html>

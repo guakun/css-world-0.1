@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>实现兼容 ie8 的凹凸效果</title>
+  <style>
+    .ao, .tu {
+      display: inline-block;
+      width: 0; font-size: 14px; line-height: 18px;
+      margin: 35px;
+      color: #fff;
+      /* 揭秘原理 */
+      color: green;
+    }
+    .ao:before, .tu:before { outline: 2px solid #cd0000; font-family: Consolas, Monaco, monospace; }
+    .ao:before { content: 'love你love'; }
+    .tu:before { content: '我love你'; }
+    .tu { direction: rtl; }
+  </style>
+</head>
+<body>
+  <span class="ao"></span>
+  <span class="tu"></span>
+</body>
+</html>

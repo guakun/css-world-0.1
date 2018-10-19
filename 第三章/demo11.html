@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>替换元素设置 block 无法让尺寸100%适应父容器</title>
+  <style>
+    /* textarea { border: 1px solid red; } */
+  </style>
+  <style>
+    /* textarea { display: block; width: 200px; } */
+    .container { width: 280px; margin: 0 auto; padding: 40px 0; background-color: #f0f3f9; animation: width 2s infinite alternate; }
+    @keyframes width { from { width: 200px; } to { width: 280px; }}
+    .textarea {
+      padding: 9px 8px;
+      border: 1px solid #d0d0d5;
+      border-radius: 4px;
+      background-color: #fff;
+    }
+    .textarea > textarea {
+      width: 100%;
+      line-height: 20px;
+      padding: 0;
+      border: 0 none;
+      outline: 0 none;
+      background: none;
+      resize: none;
+    }
+
+    /* 张鑫旭大大认为的合理的重置方式 */
+    input, textarea, img, video, object {
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <p>根据我这么多年的开发经验，在 CSS 世界中，唯一离不开 box-sizing:border-box 的 就是原生普通文本框 input 和文本域 textarea 的 100%自适应父容器宽度。 </p>
+  <p>拿文本域 textarea 举例，textarea 为替换元素，替换元素的特性之一就是尺寸由 内部元素决定，且无论其 display 属性值是 inline 还是 block。这个特性很有意思，对于 非替换元素，如果其 display 属性值为 block，则会具有流动性，宽度由外部尺寸决定，但 是替换元素的宽度却不受 display 水平影响，因此，我们通过 CSS 修改 textarea 的 display 水平是无法让尺寸 100%自适应父容器的：</p>
+  <textarea></textarea>
+  <p>所以，我们只能通过 width 设定让 textarea 尺寸 100%自适应父容器。那么，问题就来了， textarea 是有 border 的，而且需要有一定的 padding 大小，否则输入的时候光标会顶着边框，体验很不好。于是，width/border 和 padding 注定要共存，同时还要整体宽度 100% 自适应容器。如果不借助其他标签，肯定是无解的。</p>
+  <div class="container">
+    <div class="textarea">
+      <textarea rows="5" placeholder="色块是容器"></textarea>
+    </div>
+  </div>
+</body>
+</html>
